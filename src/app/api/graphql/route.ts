@@ -2,7 +2,7 @@ import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { typeDefs } from '../../../lib/graphql/schema';
 import { resolvers } from '../../../lib/graphql/resolvers';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 const server = new ApolloServer({
   typeDefs,
@@ -10,8 +10,8 @@ const server = new ApolloServer({
   introspection: true,
 });
 
-const handler = startServerAndCreateNextHandler<NextRequest>(server, {
-  context: async (req) => {
+const handler = startServerAndCreateNextHandler(server, {
+  context: async (req: NextRequest) => {
     // Convert Headers object to plain object for GraphQL context
     const headersObj: { [key: string]: string } = {};
     if (req.headers instanceof Headers) {
@@ -28,4 +28,10 @@ const handler = startServerAndCreateNextHandler<NextRequest>(server, {
   },
 });
 
-export { handler as GET, handler as POST };
+export async function GET(request: NextRequest) {
+  return handler(request);
+}
+
+export async function POST(request: NextRequest) {
+  return handler(request);
+}
