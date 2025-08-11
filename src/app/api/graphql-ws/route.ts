@@ -2,7 +2,7 @@ import { createServer } from 'http';
 import { parse } from 'url';
 import next from 'next';
 import { WebSocketServer } from 'ws';
-import { useServer } from 'graphql-ws/lib/use/ws';
+import { useServer } from 'graphql-ws/use/ws';
 import { GraphQLSchema } from 'graphql';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { typeDefs } from '../../../lib/graphql/schema';
@@ -23,7 +23,6 @@ export default async function handler(req: any, res: any) {
   }
 
   if (req.method === 'GET') {
-    // Handle WebSocket upgrade
     if (req.headers.upgrade === 'websocket') {
       const server = createServer();
       const wsServer = new WebSocketServer({
@@ -34,18 +33,17 @@ export default async function handler(req: any, res: any) {
       useServer(
         {
           schema,
-          context: async (ctx, msg, args) => {
-            // You can add authentication logic here
+          context: async (ctx: any, msg: any, args: any) => {
             return {
               connectionParams: ctx.connectionParams,
               user: ctx.connectionParams?.auth0Id,
             };
           },
-          onConnect: async (ctx) => {
+          onConnect: async (ctx: any) => {
             console.log('Client connected to WebSocket');
             return { connectionParams: ctx.connectionParams };
           },
-          onDisconnect: (ctx, code, reason) => {
+          onDisconnect: (ctx: any, code: any, reason: any) => {
             console.log('Client disconnected from WebSocket', code, reason);
           },
         },
