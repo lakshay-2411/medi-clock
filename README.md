@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MediClock - Healthcare Worker Time Tracking System
 
-## Getting Started
+A comprehensive web application for healthcare organizations to manage worker shift tracking through location-based clock-in/clock-out functionality with role-based access for managers and care workers.
 
-First, run the development server:
+## Features
+
+### 🏥 **Role-Based Access Control**
+- **Manager Role**: Set location perimeters, view real-time staff status, access detailed analytics
+- **Care Worker Role**: Clock in/out with location validation, view personal shift history
+
+### 📍 **Location-Based Features**
+- GPS location verification for clock-in/clock-out
+- Configurable perimeter boundaries around facilities
+- Real-time distance calculation using Haversine formula
+- Location permission handling and error management
+
+### 📊 **Dashboard & Analytics**
+- Real-time staff status overview
+- Comprehensive shift history tracking
+- Daily, weekly, and monthly reporting
+- Average hours worked calculations
+- Interactive data visualizations
+
+### 🔐 **Authentication System**
+- Email/password authentication
+- JWT token management
+- Auth0 ready integration
+- Secure session management
+
+### 📱 **Mobile-First Design**
+- Responsive design for all devices
+- Progressive Web App (PWA) ready
+- Tailwind CSS for modern UI
+- Grommet components for healthcare-appropriate interface
+
+## Tech Stack
+
+- **Frontend**: Next.js 15 with App Router, React 18, TypeScript
+- **Backend**: GraphQL with Apollo Server
+- **Database**: PostgreSQL with Prisma ORM
+- **Authentication**: JWT + Auth0 ready
+- **Styling**: Tailwind CSS
+- **Location**: Browser Geolocation API
+- **State Management**: React Context API
+
+## Quick Start
+
+### 1. Installation
+
+```bash
+# Install dependencies
+npm install
+```
+
+### 2. Environment Setup
+
+The `.env` file is already configured with a Prisma development database.
+
+### 3. Database Setup
+
+```bash
+# Start Prisma development database
+npx prisma dev
+
+# Push schema to database
+npx prisma db push
+
+# Generate Prisma client
+npx prisma generate
+```
+
+### 4. Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Demo Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Register as a Manager or Care Worker**
+   - Use Organization ID: `demo-org-123` (when available)
+   - Register at `/auth/register`
 
-## Learn More
+2. **Manager Features**
+   - View dashboard at `/dashboard`
+   - Monitor real-time staff status
+   - View analytics and reports
 
-To learn more about Next.js, take a look at the following resources:
+3. **Care Worker Features**
+   - Clock in/out at `/clock`
+   - Location validation required
+   - Add optional shift notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Key Components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Authentication**: JWT-based with role routing
+- **Location Services**: GPS validation with perimeter checking
+- **Dashboard**: Real-time staff monitoring for managers
+- **Clock Interface**: Simple clock-in/out for care workers
+- **GraphQL API**: Complete CRUD operations with type safety
 
-## Deploy on Vercel
+## Security Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 🔒 JWT token authentication
+- 🔒 Password hashing with bcrypt
+- 🔒 Role-based access control
+- 🔒 Input validation and sanitization
+- 🔒 Location-based restrictions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Development Scripts
+
+```bash
+npm run dev              # Start development server
+npm run build           # Build for production
+npm run db:push         # Push schema changes
+npx prisma studio       # Open Prisma Studio
+```
