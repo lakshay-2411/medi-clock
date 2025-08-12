@@ -2,6 +2,8 @@
 
 A comprehensive, location-based time tracking application specifically designed for healthcare organizations. Built with modern web technologies to provide secure, real-time monitoring of healthcare worker shifts with GPS verification and role-based access control.
 
+Use ``` MANAGER2025 ``` as Manager's Code
+
 ## 🌟 Features
 
 ### 👥 **Role-Based Access Control**
